@@ -7,3 +7,16 @@ services:
       - .env
     environment:
       - TZ=Asia/Jerusalem
+      - MONGO_URI=mongodb://mongo:27017/barber
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    container_name: barber-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
